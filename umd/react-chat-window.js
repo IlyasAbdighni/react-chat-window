@@ -753,7 +753,12 @@ var TextMessage = function TextMessage(props) {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'div',
     { className: 'sc-message--text' },
-    props.data.text
+    props.data.text,
+    props.data.meta && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'p',
+      { className: 'sc-message--meta' },
+      props.data.meta
+    )
   );
 };
 

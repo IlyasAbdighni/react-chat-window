@@ -391,6 +391,11 @@
   font-size: 40px;
 }
 
+.sc-message--meta {
+  font-size: xx-small;
+  margin-bottom: -10px;
+}
+
 @media (max-width: 450px) {
   .sc-message {
     width: 80%;

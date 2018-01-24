@@ -14,6 +14,6 @@ export default [
   {type: 'text', author: "me", data: { text: "It's about nothing."} },
   {type: 'text', author: "them", data: { text: "No story?"} },
   {type: 'text', author: "me", data: { text: "No forget the story. "} },
-  {type: 'text', author: "them", data: { text: "You've got to have a story."} },
+  {type: 'text', author: "them", data: { text: "You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. You've got to have a story. ", meta: 'Read' } },
   {type: 'emoji', author: "me", data: { emoji: "😋"} },
 ]

@@ -5,7 +5,12 @@ var TextMessage = function TextMessage(props) {
   return React.createElement(
     'div',
     { className: 'sc-message--text' },
-    props.data.text
+    props.data.text,
+    props.data.meta && React.createElement(
+      'p',
+      { className: 'sc-message--meta' },
+      props.data.meta
+    )
   );
 };
 
