@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import SendIcon from './icons/SendIcon';
 import EmojiIcon from './icons/EmojiIcon';
 import EmojiPicker from './emoji-picker/EmojiPicker';
+import FileIcons from './icons/FileIcon'
 
 
 class UserInput extends Component {
@@ -60,6 +61,9 @@ class UserInput extends Component {
           <div className="sc-user-input--button"></div>
           <div className="sc-user-input--button">
             {this.props.showEmoji && <EmojiIcon onEmojiPicked={this._handleEmojiPicked.bind(this)} />}
+          </div>
+          <div className="sc-user-input--button">
+            <FileIcons onClick={() => console.log('file icon clicked')} />
           </div>
           <div className="sc-user-input--button">
             <SendIcon onClick={this._submitText.bind(this)} />
