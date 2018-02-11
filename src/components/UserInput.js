@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { render } from 'react-dom'
 import SendIcon from './icons/SendIcon';
 import EmojiIcon from './icons/EmojiIcon';
 import EmojiPicker from './emoji-picker/EmojiPicker';
@@ -12,6 +13,7 @@ class UserInput extends Component {
     super();
     this.state = {
       inputActive: false,
+      file: null
     };
   }
 
@@ -24,13 +26,33 @@ class UserInput extends Component {
   _submitText(event) {
     event.preventDefault();
     const text = this.userInput.textContent;
-    if (text && text.length > 0) {
-      this.props.onSubmit({
-        author: 'me',
-        type: 'text',
-        data: { text }
-      });
-      this.userInput.innerHTML = '';
+    const file = this.state.file
+    if (file) {
+      if (text && text.length > 0) {
+        this.props.onSubmit({
+          author: 'me',
+          type: 'file',
+          data: { text, file }
+        });
+        this.setState({ file: null })
+        this.userInput.innerHTML = '';
+      } else {
+        this.props.onSubmit({
+          author: 'me',
+          type: 'file',
+          data: { file }
+        });
+        this.setState({ file: null })
+      }
+    } else {
+      if (text && text.length > 0) {
+        this.props.onSubmit({
+          author: 'me',
+          type: 'text',
+          data: { text }
+        });
+        this.userInput.innerHTML = '';
+      }
     }
   }
 
@@ -42,34 +64,54 @@ class UserInput extends Component {
     });
   }
 
+  _handleFileSubmit(file) {
+    console.log(file);
+    // this.userInput.innerHTML = file.name
+    // this.props.onSubmit({
+    //   author: 'me',
+    //   type: 'file',
+    //   data: { file }
+    // });
+    this.setState({ file })
+  }
+
   render() {
     return (
-      <form className={`sc-user-input ${(this.state.inputActive ? 'active' : '')}`}>
-        <div
-          role="button"
-          tabIndex="0"
-          onFocus={() => { this.setState({ inputActive: true }); }}
-          onBlur={() => { this.setState({ inputActive: false }); }}
-          ref={(e) => { this.userInput = e; }}
-          onKeyDown={this.handleKey.bind(this)}
-          contentEditable="true"
-          placeholder="Write a reply..."
-          className="sc-user-input--text"
-        >
-        </div>
-        <div className="sc-user-input--buttons">
-          <div className="sc-user-input--button"></div>
-          <div className="sc-user-input--button">
-            {this.props.showEmoji && <EmojiIcon onEmojiPicked={this._handleEmojiPicked.bind(this)} />}
+      <div>
+        {
+          this.state.file &&
+          <div className='file-container' >
+            {this.state.file && this.state.file.name}
+            <span className='delete-file-message' onClick={() => this.setState({ file: null })} >X</span>
           </div>
-          <div className="sc-user-input--button">
-            <FileIcons onClick={() => console.log('file icon clicked')} />
+        }
+        <form className={`sc-user-input ${(this.state.inputActive ? 'active' : '')}`}>
+          <div
+            role="button"
+            tabIndex="0"
+            onFocus={() => { this.setState({ inputActive: true }); }}
+            onBlur={() => { this.setState({ inputActive: false }); }}
+            ref={(e) => { this.userInput = e; }}
+            onKeyDown={this.handleKey.bind(this)}
+            contentEditable="true"
+            placeholder="Write a reply..."
+            className="sc-user-input--text"
+          >
           </div>
-          <div className="sc-user-input--button">
-            <SendIcon onClick={this._submitText.bind(this)} />
+          <div className="sc-user-input--buttons">
+            <div className="sc-user-input--button"></div>
+            <div className="sc-user-input--button">
+              {this.props.showEmoji && <EmojiIcon onEmojiPicked={this._handleEmojiPicked.bind(this)} />}
+            </div>
+            <div className="sc-user-input--button">
+              <FileIcons onChange={(file) => this._handleFileSubmit(file)} />
+            </div>
+            <div className="sc-user-input--button">
+              <SendIcon onClick={this._submitText.bind(this)} />
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     );
   }
 }

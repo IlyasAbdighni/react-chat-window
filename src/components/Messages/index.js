@@ -1,21 +1,24 @@
 import React, { Component } from 'react'
 import TextMessage from './TextMessage'
 import EmojiMessage from './EmojiMessage'
+import FileMessage from './FileMessage'
 import chatIconUrl from './../../assets/chat-icon.svg'
 
 
 class Message extends Component {
 
   _renderMessageOfType(type) {
-    switch(type) {
+    switch (type) {
       case 'text':
         return <TextMessage {...this.props.message} />
       case 'emoji':
         return <EmojiMessage {...this.props.message} />
+      case 'file':
+        return <FileMessage {...this.props.message} />
     }
   }
 
-  render () {
+  render() {
     let contentClassList = [
       "sc-message--content",
       (this.props.message.author === "me" ? "sent" : "received")
