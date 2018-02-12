@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
-import {Launcher} from '../../src'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
+import { Launcher } from '../../src'
 import messageHistory from './messageHistory';
 import TestArea from './TestArea';
 import Header from './Header';
@@ -66,6 +66,7 @@ class Demo extends Component {
         handleClick={this._handleClick.bind(this)}
         isOpen={this.state.isOpen}
         showEmoji
+        showAddFile
       />
       <img className="demo-monster-img" src={monsterImgUrl} />
       <Footer />
@@ -73,4 +74,4 @@ class Demo extends Component {
   }
 }
 
-render(<Demo/>, document.querySelector('#demo'))
+render(<Demo />, document.querySelector('#demo'))

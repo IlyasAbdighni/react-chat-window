@@ -10459,7 +10459,7 @@ var ChatWindow = function (_Component) {
         messages: messageList,
         imageUrl: this.props.agentProfile.imageUrl
       }),
-      __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__UserInput__["a" /* default */], { showEmoji: this.props.showEmoji, onSubmit: this.onUserInputSubmit.bind(this) })
+      __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__UserInput__["a" /* default */], { showEmoji: this.props.showEmoji, onSubmit: this.onUserInputSubmit.bind(this), showAddFile: this.props.showAddFile })
     );
   };
 
@@ -10594,7 +10594,8 @@ var Launcher = function (_Component) {
         agentProfile: this.props.agentProfile,
         isOpen: isOpen,
         onClose: this.handleClick.bind(this),
-        showEmoji: this.props.showEmoji
+        showEmoji: this.props.showEmoji,
+        showAddFile: this.props.showAddFile
       })
     );
   };
@@ -10969,10 +10970,10 @@ var UserInput = function (_Component) {
             { className: 'sc-user-input--button' },
             this.props.showEmoji && __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__icons_EmojiIcon__["a" /* default */], { onEmojiPicked: this._handleEmojiPicked.bind(this) })
           ),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          this.props.showAddFile && __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'div',
             { className: 'sc-user-input--button' },
-            this.props.showAttachment && __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__icons_FileIcon__["a" /* default */], { onChange: function onChange(file) {
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__icons_FileIcon__["a" /* default */], { onChange: function onChange(file) {
                 return _this2._handleFileSubmit(file);
               } })
           ),
@@ -10992,11 +10993,7 @@ var UserInput = function (_Component) {
 UserInput.propTypes = {
   onSubmit: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.func.isRequired,
   showEmoji: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.bool,
-  showAttachment: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.bool
-};
-
-UserInput.defaultProps = {
-  showAttachment: true
+  showAddFile: __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.bool
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (UserInput);

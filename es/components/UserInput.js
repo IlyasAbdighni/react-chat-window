@@ -132,10 +132,10 @@ var UserInput = function (_Component) {
             { className: 'sc-user-input--button' },
             this.props.showEmoji && React.createElement(EmojiIcon, { onEmojiPicked: this._handleEmojiPicked.bind(this) })
           ),
-          React.createElement(
+          this.props.showAddFile && React.createElement(
             'div',
             { className: 'sc-user-input--button' },
-            this.props.showAttachment && React.createElement(FileIcons, { onChange: function onChange(file) {
+            React.createElement(FileIcons, { onChange: function onChange(file) {
                 return _this2._handleFileSubmit(file);
               } })
           ),
@@ -155,11 +155,7 @@ var UserInput = function (_Component) {
 UserInput.propTypes = process.env.NODE_ENV !== "production" ? {
   onSubmit: PropTypes.func.isRequired,
   showEmoji: PropTypes.bool,
-  showAttachment: PropTypes.bool
+  showAddFile: PropTypes.bool
 } : {};
-
-UserInput.defaultProps = {
-  showAttachment: true
-};
 
 export default UserInput;

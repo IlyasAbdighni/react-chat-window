@@ -42,7 +42,7 @@ var ChatWindow = function (_Component) {
         messages: messageList,
         imageUrl: this.props.agentProfile.imageUrl
       }),
-      React.createElement(UserInput, { showEmoji: this.props.showEmoji, onSubmit: this.onUserInputSubmit.bind(this) })
+      React.createElement(UserInput, { showEmoji: this.props.showEmoji, onSubmit: this.onUserInputSubmit.bind(this), showAddFile: this.props.showAddFile })
     );
   };
 
