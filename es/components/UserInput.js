@@ -6,9 +6,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { render } from 'react-dom';
 import SendIcon from './icons/SendIcon';
 import EmojiIcon from './icons/EmojiIcon';
 import EmojiPicker from './emoji-picker/EmojiPicker';
+import FileIcons from './icons/FileIcon';
 
 var UserInput = function (_Component) {
   _inherits(UserInput, _Component);
@@ -19,7 +21,8 @@ var UserInput = function (_Component) {
     var _this = _possibleConstructorReturn(this, _Component.call(this));
 
     _this.state = {
-      inputActive: false
+      inputActive: false,
+      file: null
     };
     return _this;
   }
@@ -33,13 +36,33 @@ var UserInput = function (_Component) {
   UserInput.prototype._submitText = function _submitText(event) {
     event.preventDefault();
     var text = this.userInput.textContent;
-    if (text && text.length > 0) {
-      this.props.onSubmit({
-        author: 'me',
-        type: 'text',
-        data: { text: text }
-      });
-      this.userInput.innerHTML = '';
+    var file = this.state.file;
+    if (file) {
+      if (text && text.length > 0) {
+        this.props.onSubmit({
+          author: 'me',
+          type: 'file',
+          data: { text: text, file: file }
+        });
+        this.setState({ file: null });
+        this.userInput.innerHTML = '';
+      } else {
+        this.props.onSubmit({
+          author: 'me',
+          type: 'file',
+          data: { file: file }
+        });
+        this.setState({ file: null });
+      }
+    } else {
+      if (text && text.length > 0) {
+        this.props.onSubmit({
+          author: 'me',
+          type: 'text',
+          data: { text: text }
+        });
+        this.userInput.innerHTML = '';
+      }
     }
   };
 
@@ -51,42 +74,76 @@ var UserInput = function (_Component) {
     });
   };
 
+  UserInput.prototype._handleFileSubmit = function _handleFileSubmit(file) {
+    console.log(file);
+    // this.userInput.innerHTML = file.name
+    // this.props.onSubmit({
+    //   author: 'me',
+    //   type: 'file',
+    //   data: { file }
+    // });
+    this.setState({ file: file });
+  };
+
   UserInput.prototype.render = function render() {
     var _this2 = this;
 
     return React.createElement(
-      'form',
-      { className: 'sc-user-input ' + (this.state.inputActive ? 'active' : '') },
-      React.createElement('div', {
-        role: 'button',
-        tabIndex: '0',
-        onFocus: function onFocus() {
-          _this2.setState({ inputActive: true });
-        },
-        onBlur: function onBlur() {
-          _this2.setState({ inputActive: false });
-        },
-        ref: function ref(e) {
-          _this2.userInput = e;
-        },
-        onKeyDown: this.handleKey.bind(this),
-        contentEditable: 'true',
-        placeholder: 'Write a reply...',
-        className: 'sc-user-input--text'
-      }),
-      React.createElement(
+      'div',
+      null,
+      this.state.file && React.createElement(
         'div',
-        { className: 'sc-user-input--buttons' },
-        React.createElement('div', { className: 'sc-user-input--button' }),
+        { className: 'file-container' },
+        this.state.file && this.state.file.name,
+        React.createElement(
+          'span',
+          { className: 'delete-file-message', onClick: function onClick() {
+              return _this2.setState({ file: null });
+            } },
+          'X'
+        )
+      ),
+      React.createElement(
+        'form',
+        { className: 'sc-user-input ' + (this.state.inputActive ? 'active' : '') },
+        React.createElement('div', {
+          role: 'button',
+          tabIndex: '0',
+          onFocus: function onFocus() {
+            _this2.setState({ inputActive: true });
+          },
+          onBlur: function onBlur() {
+            _this2.setState({ inputActive: false });
+          },
+          ref: function ref(e) {
+            _this2.userInput = e;
+          },
+          onKeyDown: this.handleKey.bind(this),
+          contentEditable: 'true',
+          placeholder: 'Write a reply...',
+          className: 'sc-user-input--text'
+        }),
         React.createElement(
           'div',
-          { className: 'sc-user-input--button' },
-          this.props.showEmoji && React.createElement(EmojiIcon, { onEmojiPicked: this._handleEmojiPicked.bind(this) })
-        ),
-        React.createElement(
-          'div',
-          { className: 'sc-user-input--button' },
-          React.createElement(SendIcon, { onClick: this._submitText.bind(this) })
+          { className: 'sc-user-input--buttons' },
+          React.createElement('div', { className: 'sc-user-input--button' }),
+          React.createElement(
+            'div',
+            { className: 'sc-user-input--button' },
+            this.props.showEmoji && React.createElement(EmojiIcon, { onEmojiPicked: this._handleEmojiPicked.bind(this) })
+          ),
+          React.createElement(
+            'div',
+            { className: 'sc-user-input--button' },
+            this.props.showAttachment && React.createElement(FileIcons, { onChange: function onChange(file) {
+                return _this2._handleFileSubmit(file);
+              } })
+          ),
+          React.createElement(
+            'div',
+            { className: 'sc-user-input--button' },
+            React.createElement(SendIcon, { onClick: this._submitText.bind(this) })
+          )
         )
       )
     );
@@ -97,7 +154,12 @@ var UserInput = function (_Component) {
 
 UserInput.propTypes = process.env.NODE_ENV !== "production" ? {
   onSubmit: PropTypes.func.isRequired,
-  showEmoji: PropTypes.bool
+  showEmoji: PropTypes.bool,
+  showAttachment: PropTypes.bool
 } : {};
+
+UserInput.defaultProps = {
+  showAttachment: true
+};
 
 export default UserInput;

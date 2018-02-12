@@ -104,7 +104,7 @@ class UserInput extends Component {
               {this.props.showEmoji && <EmojiIcon onEmojiPicked={this._handleEmojiPicked.bind(this)} />}
             </div>
             <div className="sc-user-input--button">
-              <FileIcons onChange={(file) => this._handleFileSubmit(file)} />
+              {this.props.showAttachment && <FileIcons onChange={(file) => this._handleFileSubmit(file)} />}
             </div>
             <div className="sc-user-input--button">
               <SendIcon onClick={this._submitText.bind(this)} />
@@ -118,7 +118,12 @@ class UserInput extends Component {
 
 UserInput.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  showEmoji: PropTypes.bool
+  showEmoji: PropTypes.bool,
+  showAttachment: PropTypes.bool
 };
+
+UserInput.defaultProps = {
+  showAttachment: true
+}
 
 export default UserInput;
