@@ -433,6 +433,8 @@
 .sc-message--meta {
   font-size: xx-small;
   margin-bottom: -10px;
+  color: white;
+  text-align: center;
 }
 
 @media (max-width: 450px) {
