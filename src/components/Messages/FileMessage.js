@@ -9,10 +9,11 @@ export default (props) => {
       {
         props.data.text ?
           <div className='sc-message--file-text' >
-            {props.data.text && props.data.text}
+            {props.data.text}
           </div>
           : ''
       }
+      {props.data.meta && <p className='sc-message--meta'>{props.data.meta}</p>}
     </div>
   )
 }

@@ -10724,8 +10724,13 @@ var EmojiMessage = function EmojiMessage(props) {
     props.data.text ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       { className: 'sc-message--file-text' },
-      props.data.text && props.data.text
-    ) : ''
+      props.data.text
+    ) : '',
+    props.data.meta && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'p',
+      { className: 'sc-message--meta' },
+      props.data.meta
+    )
   );
 });
 

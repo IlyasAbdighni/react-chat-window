@@ -16,7 +16,12 @@ export default (function (props) {
     props.data.text ? React.createElement(
       'div',
       { className: 'sc-message--file-text' },
-      props.data.text && props.data.text
-    ) : ''
+      props.data.text
+    ) : '',
+    props.data.meta && React.createElement(
+      'p',
+      { className: 'sc-message--meta' },
+      props.data.meta
+    )
   );
 });
