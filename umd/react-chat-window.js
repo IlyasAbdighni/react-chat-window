@@ -10708,7 +10708,7 @@ var EmojiMessage = function EmojiMessage(props) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
 
-/* harmony default export */ __webpack_exports__["a"] = (function (props) {
+var FileMessage = function FileMessage(props) {
   return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
     'div',
     { className: 'sc-message--file' },
@@ -10717,7 +10717,7 @@ var EmojiMessage = function EmojiMessage(props) {
       { className: 'sc-message--file-name' },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'a',
-        { href: '#', target: '_blank' },
+        { href: props.data.file.url ? props.data.file.url : '#', target: '_blank' },
         props.data.file.name
       )
     ),
@@ -10732,7 +10732,9 @@ var EmojiMessage = function EmojiMessage(props) {
       props.data.meta
     )
   );
-});
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (FileMessage);
 
 /***/ }),
 /* 94 */

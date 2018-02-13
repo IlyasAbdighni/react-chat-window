@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default (function (props) {
+var FileMessage = function FileMessage(props) {
   return React.createElement(
     'div',
     { className: 'sc-message--file' },
@@ -9,7 +9,7 @@ export default (function (props) {
       { className: 'sc-message--file-name' },
       React.createElement(
         'a',
-        { href: '#', target: '_blank' },
+        { href: props.data.file.url ? props.data.file.url : '#', target: '_blank' },
         props.data.file.name
       )
     ),
@@ -24,4 +24,6 @@ export default (function (props) {
       props.data.meta
     )
   );
-});
+};
+
+export default FileMessage;

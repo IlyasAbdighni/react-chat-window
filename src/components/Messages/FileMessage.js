@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default (props) => {
+const FileMessage = (props) => {
   return (
     <div className='sc-message--file' >
       <div className='sc-message--file-name' >
-        <a href='#' target='_blank' >{props.data.file.name}</a>
+        <a href={props.data.file.url ? props.data.file.url : '#'} target='_blank' >{props.data.file.name}</a>
       </div>
       {
         props.data.text ?
@@ -17,3 +17,5 @@ export default (props) => {
     </div>
   )
 }
+
+export default FileMessage
