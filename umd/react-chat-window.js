@@ -10721,7 +10721,7 @@ var FileMessage = function FileMessage(props) {
         props.data.file.name
       )
     ),
-    props.data.text ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    props.data.text && props.data.text !== "undefined" ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       { className: 'sc-message--file-text' },
       props.data.text

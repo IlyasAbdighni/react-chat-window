@@ -7,7 +7,7 @@ const FileMessage = (props) => {
         <a href={props.data.file.url ? props.data.file.url : '#'} target='_blank' >{props.data.file.name}</a>
       </div>
       {
-        props.data.text ?
+        (props.data.text && props.data.text !== "undefined") ?
           <div className='sc-message--file-text' >
             {props.data.text}
           </div>
