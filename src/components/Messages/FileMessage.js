@@ -10,7 +10,8 @@ export default (props) => {
         props.data.text ?
           <div className='sc-message--file-text' >
             {props.data.text && props.data.text}
-          </div> : ''
+          </div>
+          : ''
       }
     </div>
   )
